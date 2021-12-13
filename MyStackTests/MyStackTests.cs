@@ -1,7 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MyStack;
-using System;
-using System.Text;
+using System.Diagnostics;
 
 namespace MyStack.Tests
 {
@@ -14,9 +12,28 @@ namespace MyStack.Tests
             string res = "Массив: ";
             for (int i = 0; i < array.Length; i++)
             {
-                res = res + array[i].ToString() + ",";
+                res = $"{res}{array[i]},";
             }
             return res;
+        }
+
+        private MyStack<string> targetString;
+        private MyStack<int> targetInt;
+        private MyStack<double> targetDouble;
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            Debug.WriteLine("Тест инициализирован");
+            targetString = new MyStack<string>();
+            targetInt = new MyStack<int>();
+            targetDouble = new MyStack<double>();
+        }
+
+        [TestCleanup]
+        public void TestCleanUp()
+        {
+            Debug.WriteLine("Тест завершен");
         }
         #endregion
 
@@ -45,7 +62,7 @@ namespace MyStack.Tests
         #region Тестирование изменения размера стека при дабовлении
         public void SizeOfMyStackAfterPushTestHelper<T>()
         {
-            T val = default(T);
+            T val = default;
             MyStack<T> target = new MyStack<T>();
 
             var count = 15;
@@ -74,7 +91,7 @@ namespace MyStack.Tests
         #region Тестирование изменения размера стека при отчистке
         public void ClearMyStackTestHelper<T>()
         {
-            T val = default(T);
+            T val = default;
             MyStack<T> target = new MyStack<T>();
 
             var count = 3;
@@ -105,7 +122,7 @@ namespace MyStack.Tests
         #region Тестирование изменения размера стека при извличении
         public void SizeOfMyStackAfterPopTestHelper<T>()
         {
-            T val = default(T);
+            T val = default;
             MyStack<T> target = new MyStack<T>();
 
             var count = 15;
@@ -136,7 +153,7 @@ namespace MyStack.Tests
         #region Тестирование изменения размера стека при получении первого элемента
         public void SizeOfMyStackAfterPeekTestHelper<T>()
         {
-            T val = default(T);
+            T val = default;
             MyStack<T> target = new MyStack<T>();
 
             var count = 15;
@@ -171,17 +188,15 @@ namespace MyStack.Tests
         #region Тестирование извличение на правильность получение
         public void PopArrIntMyStackTestHelper()
         {
-            MyStack<int> target = new MyStack<int>();
+            targetInt.Push(1);
+            targetInt.Push(2);
+            targetInt.Push(3);
+            targetInt.Push(4);
+            targetInt.Push(5);
 
-            target.Push(1);
-            target.Push(2);
-            target.Push(3);
-            target.Push(4);
-            target.Push(5);
+            targetInt.Pop();
 
-            target.Pop();
-
-            int[] actual = target.ToArray();
+            int[] actual = targetInt.ToArray();
 
             int[] expected = new int[] { 1, 2, 3, 4 };
 
@@ -195,17 +210,15 @@ namespace MyStack.Tests
 
         public void PopArrStringMyStackTestHelper()
         {
-            MyStack<string> target = new MyStack<string>();
+            targetString.Push("A");
+            targetString.Push("B");
+            targetString.Push("C");
+            targetString.Push("D");
+            targetString.Push("E");
 
-            target.Push("A");
-            target.Push("B");
-            target.Push("C");
-            target.Push("D");
-            target.Push("E");
+            targetString.Pop();
 
-            target.Pop();
-
-            string[] actual = target.ToArray();
+            string[] actual = targetString.ToArray();
 
             string[] expected = new string[] { "A", "B", "C", "D" };
 
@@ -219,17 +232,15 @@ namespace MyStack.Tests
 
         public void PopArrDoubleMyStackTestHelper()
         {
-            MyStack<double> target = new MyStack<double>();
+            targetDouble.Push(0.00);
+            targetDouble.Push(0.01);
+            targetDouble.Push(0.02);
+            targetDouble.Push(0.03);
+            targetDouble.Push(0.04);
 
-            target.Push(0.00);
-            target.Push(0.01);
-            target.Push(0.02);
-            target.Push(0.03);
-            target.Push(0.04);
+            targetDouble.Pop();
 
-            target.Pop();
-
-            var actual = target.ToArray();
+            var actual = targetDouble.ToArray();
 
             var expected = new double[] { 0.00, 0.01, 0.02, 0.03 };
 
@@ -320,7 +331,7 @@ namespace MyStack.Tests
         /// </summary>
         public void PopTypeMyStackTestHelper<T>()
         {
-            T val = default(T);
+            T val = default;
             MyStack<T> target = new MyStack<T>();
 
             var count = 15;
@@ -375,7 +386,7 @@ namespace MyStack.Tests
         #region Тестирование заполненного стека
         public void IsEmptyMyStackTestHelper<T>()
         {
-            T val = default(T);
+            T val = default;
             MyStack<T> target = new MyStack<T>();
             target.Push(val);
             target.Push(val);

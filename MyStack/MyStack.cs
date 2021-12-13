@@ -34,7 +34,7 @@ namespace MyStack
         {
             get { return count == 0; }
         }
-        
+
         /// <summary>
         /// Количество элементов в стеке
         /// </summary>
