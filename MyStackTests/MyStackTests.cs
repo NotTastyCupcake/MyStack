@@ -8,6 +8,18 @@ namespace MyStack.Tests
     [TestClass()]
     public class MyStackTests_NodeTest
     {
+        #region Поля и доп. методы
+        private string ArrUnion<T>(T[] array)
+        {
+            string res = "Массив: ";
+            for (int i = 0; i < array.Length; i++)
+            {
+                res = res + array[i].ToString() + ",";
+            }
+            return res;
+        }
+        #endregion
+
         #region Тестирование размера стека (Count, Push, Pop, Clear)
 
         #region Тестирование начального размера стека
@@ -173,17 +185,9 @@ namespace MyStack.Tests
 
             int[] expected = new int[] { 1, 2, 3, 4 };
 
-            string a = "Массив: ";
-            for (int i = 0; i < actual.Length; i++)
-            {
-                a = a + actual[i].ToString() + ",";
-            }
+            string a = ArrUnion(actual);
 
-            string e = "Массив: ";
-            for (int i = 0; i < expected.Length; i++)
-            {
-                e = e + expected[i].ToString() + ",";
-            }
+            string e = ArrUnion(expected);
 
             CollectionAssert.AreEqual(expected,
                 actual, $"Ошибка при извличении элемента!!! Expected: {e} не равен Actual: {a}");
@@ -205,17 +209,9 @@ namespace MyStack.Tests
 
             string[] expected = new string[] { "A", "B", "C", "D" };
 
-            string a = "Массив: ";
-            for (int i = 0; i < actual.Length; i++)
-            {
-                a = a + actual[i].ToString() + ",";
-            }
+            string a = ArrUnion(actual);
 
-            string e = "Массив: ";
-            for (int i = 0; i < expected.Length; i++)
-            {
-                e = e + expected[i].ToString() + ",";
-            }
+            string e = ArrUnion(expected);
 
             CollectionAssert.AreEqual(expected,
                 actual, $"Ошибка при извличении элемента!!! Expected: {e} не равен Actual: {a}");
@@ -237,17 +233,9 @@ namespace MyStack.Tests
 
             var expected = new double[] { 0.00, 0.01, 0.02, 0.03 };
 
-            string a = "Массив: ";
-            for (int i = 0; i < actual.Length; i++)
-            {
-                a = a + actual[i].ToString() + ",";
-            }
+            string a = ArrUnion(actual);
 
-            string e = "Массив: ";
-            for (int i = 0; i < expected.Length; i++)
-            {
-                e = e + expected[i].ToString() + ",";
-            }
+            string e = ArrUnion(expected);
 
             CollectionAssert.AreEqual(expected,
                 actual, $"Ошибка при извличении элемента!!! Expected: {e} не равен Actual: {a}");
